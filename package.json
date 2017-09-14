@@ -1,0 +1,56 @@
+{
+  "name": "{{package_name}}",
+  "description": "{{package_description}}",
+  "version": "1.0.0",
+  "tags": [
+    "rest",
+    "api",
+    "web"
+  ],
+  "author": {
+    "name": "{{author_full_name}}",
+    "email": "{{author_email}}"
+  },
+  "bugs": {
+    "url": "https://github.com/{{author_github_account}}/{{package_name}}/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/{{author_github_account}}/{{package_name}}",
+  "repository": {
+    "type": "git",
+    "url": "http://github.com/{{author_github_account}}/{{package_name}}.git"
+  },
+  "main": "server/server.js",
+  "dependencies": {
+    "should": "3.1.2",
+    "superagent": "0.15.x",
+    "{{rest_api_module_name}}": "{{rest_api_module_version}}",
+    "mu2": "latest",
+    "mocha": "latest",
+    "jayschema": "0.2.x",
+    "js-yaml": "latest",
+    "express": "3.3.6",
+    "request" : "*",
+    "http-proxy": "0.10.3"
+  },
+  "devDependencies": {
+    "coveralls": "^2.11.15",
+    "cross-env": "^2.x.x",
+    "eslint": "^3.10.2",
+    "istanbul": "1.0.0-alpha.2",
+    "mocha": "^2.x.x",
+    "mocha-lcov-reporter": "^1.2.0",
+    "superagent": "^3.1.0"
+  },
+  "scripts": {
+    "lint": "eslint server/**.js",
+    "test": "cross-env NODE_ENV=test mocha --recursive 'server/**/*.spec.js'",
+    "test:watch": "npm test -- --watch",
+    "coverage": "NODE_ENV=test istanbul cover _mocha -- recursive --timeout 15000 'server/**/*.spec.js'",
+    "coveralls": "NODE_ENV=test istanbul cover _mocha --report lcovonly -- recursive --timeout 15000 'lib/**/*.spec.js' -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+  },
+  "pre-push": [
+    "lint",
+    "test"
+  ]
+}
